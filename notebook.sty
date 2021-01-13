@@ -1,0 +1,105 @@
+\ProvidesPackage{notebook}
+
+%% Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[left=1.5in, right=1.5in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathabx}
+\usepackage{enumerate}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true}
+\usepackage{url}
+\usepackage{color}
+\usepackage{algorithm}
+\usepackage[noend]{algorithmic}
+\usepackage[utf8]{inputenc}
+\usepackage{wasysym}
+\usepackage{subcaption}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,snakes,automata,backgrounds,petri}
+\usepackage{lipsum}
+\usepackage{python}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{bm}
+%% Notation %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\Rbar}{\ensuremath{\bar{\mathbb{R}}}}
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand{\X}{\ensuremath{\mathbb{X}}}
+\newcommand{\A}{\ensuremath{\mathbb{A}}}
+\newcommand{\E}{\ensuremath{\mathbb{E}}}
+\newcommand{\F}{\ensuremath{\mathbb{F}}}
+\newcommand{\K}{\ensuremath{\mathbb{K}}}
+\newcommand{\B}{\ensuremath{\mathcal{B}}}
+\newcommand{\Gr}{\ensuremath{\mbox{Gr}}}
+\newcommand{\proj}{\ensuremath{\text{proj}}}
+\renewcommand{\P}{\ensuremath{\mathbb{P}}}
+\renewcommand{\H}{\ensuremath{\mathbb{H}}}
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+%% Environments %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheorem{thm}{Theorem}
+\newtheorem{prp}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{definition}[thm]{Definition}
+\newtheorem{example}[thm]{Example}
+\newtheorem{remark}[thm]{Remark}
+\newtheorem{asmp}{Assumption}
+\newtheorem{innercustomthm}{Assumption}
+\newtheorem{conjecture}[thm]{Conjecture}
+\newenvironment{customthm}[1]
+  {\renewcommand\theinnercustomthm{#1}\innercustomthm}
+  {\endinnercustomthm}
+\newcounter{theo}[section]\setcounter{theo}{0}
+\renewcommand{\thetheo}{\arabic{section}.\arabic{theo}}
+\newenvironment{theo}[2][]{%
+\refstepcounter{theo}%
+\ifstrempty{#1}%
+{\mdfsetup{%
+frametitle={%
+\tikz[baseline=(current bounding box.east),outer sep=0pt]
+\node[anchor=east,rectangle,fill=blue!20]
+{\strut Theorem~\thetheo};}}
+}%
+{\mdfsetup{%
+frametitle={%
+\tikz[baseline=(current bounding box.east),outer sep=0pt]
+\node[anchor=east,rectangle,fill=blue!20]
+{\strut Theorem~\thetheo:~#1};}}%
+}%
+\mdfsetup{innertopmargin=10pt,linecolor=blue!20,%
+linewidth=2pt,topline=true,%
+frametitleaboveskip=\dimexpr-\ht\strutbox\relax
+}
+\begin{mdframed}[]\relax%
+  \label{#2}}{\end{mdframed}}
+
+\newcounter{defn}[section]\setcounter{defn}{0}
+% \renewcommand{\thedefn}{\arabic{section}.\arabic{defn}}
+\renewcommand{\thedefn}{}
+\newenvironment{defn}[2][]{%
+\refstepcounter{defn}%
+\ifstrempty{#1}%
+{\mdfsetup{%
+frametitle={%
+\tikz[baseline=(current bounding box.east),outer sep=0pt]
+\node[anchor=east,rectangle,fill=gray!20]
+{\strut Definition~\thedefn};}}
+}%
+{\mdfsetup{%
+frametitle={%
+\tikz[baseline=(current bounding box.east),outer sep=0pt]
+\node[anchor=east,rectangle,fill=gray!20]
+{\strut Definition:~#1};}}%
+}%
+\mdfsetup{innertopmargin=10pt, innerbottommargin=10pt, linecolor=gray!20,%
+linewidth=2pt,topline=true,%
+frametitleaboveskip=\dimexpr-\ht\strutbox\relax
+}
+\begin{mdframed}[]\relax%
+\label{#2}}{\end{mdframed}}
